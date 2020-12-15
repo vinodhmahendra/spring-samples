@@ -1,4 +1,5 @@
 package io.pivotal.workshop.controller;
+
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +14,21 @@ import io.pivotal.workshop.repository.ExchangeValueRepository;
 @RestController
 public class CurrencyExchangeController {
 	
+	
 	@Autowired
 	private Environment environment;
-	
+
 	@Autowired
 	private ExchangeValueRepository repository;
-	
+
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
-	public ExchangeValue retrieveExchangeValue
-		(@PathVariable String from, @PathVariable String to){
-		
-		ExchangeValue exchangeValue = 
-				repository.findByFromAndTo(from, to);
-		
-		//dynamically assign  the value
-		exchangeValue.setPort(
-				Integer.parseInt(environment.getProperty("local.server.port")));
-		
+	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
+
+		ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
+
+		// dynamically assign the value
+		exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+
 		return exchangeValue;
 	}
 }
