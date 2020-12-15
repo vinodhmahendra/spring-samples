@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.tanzu.workshop.repository.UserRepository;
+import io.tanzu.workshop.exceptions.UserNotFoundException;
 import io.tanzu.workshop.model.User;
+
 @RestController
 public class UserResource {
 	@Autowired
@@ -32,7 +34,9 @@ public class UserResource {
 		if (user.isPresent()) {
 			return user.get();
 		}
-		return null;
+		else {
+			throw new UserNotFoundException("id-" +id);
+		}
 	}
 	
 	@PostMapping("/users")

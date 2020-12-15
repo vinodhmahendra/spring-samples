@@ -3,12 +3,15 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 @Entity
+//@Table
 public class User {
 
 	@Id
 	private Integer id;
 
+//	@Column
 	private String name;
 
 	private Date birthDate;
